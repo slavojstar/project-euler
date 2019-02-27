@@ -693,7 +693,90 @@ def PartitionHelper(n, m, numDict = {}):
 
 	return (ways, numDict)
 
-print(Partition(72))
+def IsPandigital(s, n):
+	''' Takes a string of integers and returns True if it is
+	pandigital from 1 to n and False otherwise '''
+
+	if not isinstance(s, str):
+		print("IsPandigital({0}, {1}): Warning: {0} is not a string.".format(s, n))
+		return
+	if not isinstance(n, int) or n < 1 or n > 9:
+		print("IsPandigital({0}, {1}): Warning: {1} must be an int between 1 and 9 (incl.)".format(s, n))
+		return
+
+	# Check if there are any duplicates:
+	setS = set(s)
+	if len(setS) > len(s):
+		return False
+
+	for i in range(1, n + 1):
+		if str(i) in setS:
+			setS.remove(str(i))
+		else:
+			return False
+
+	if setS:
+		return False
+	else:
+		return True
+
+def NthChampernowne(n):
+	''' Returns the nth digit in the fractional part of Champernowne's
+	constant '''
+
+	if not isinstance(n, int) or n < 1:
+		print("NthChampernowne({0}): Warning: {0} must be an integer greater than 0.".format(n))
+
+	# There are exactly 9 * n * (10 ** (n - 1)) numbers that have n digits. So you can
+	# partition the fractional part of Champernowne's constant into bins of size
+	# 9 * n * (10 ** (n - 1)). We want to find in which bin is the nth digit, and therefore
+	# how many digits has the number it is part of. (i.e. 12th Champernown is the 1st '1'
+	# of '11' in the decimal expansion, so it is in the 2nd bin, and therefore is part of 
+	# a number with 2 digits).
+
+	digits = 1
+	lowerBoundary = 0
+	upperBoundary = 0
+
+	while True:
+		upperBoundary = lowerBoundary + 9 * digits * (10 ** (digits - 1))
+		if n > lowerBoundary and n <= upperBoundary:
+			break
+		else:
+			digits += 1
+			lowerBoundary = upperBoundary
+
+	# The interval is how far into its bin the digit is
+	interval = n - lowerBoundary - 1
+	# firstNum is the first number in the bin
+	firstNum = 10 ** (digits - 1)
+	# num is the nth number into the bin
+	num = math.floor(interval / digits)
+	# microNum is which character in the number the nth digit is
+	microNum = (interval % digits)
+	numToExtract = str(firstNum + num)
+
+	return int(numToExtract[microNum])
+
+def Permute(s):
+	''' Returns a list of permutations of a string s '''
+	if len(s) == 1:
+		return [s[0]]
+	elif len(s) == 2:
+		return [s[0] + s[1], s[1] + s[0]]
+	else:
+		perms = []
+		listS = list(s)
+		for elem in listS:
+			newListS = listS.copy()
+			newListS.remove(elem)
+			newStringS = ''
+			for newElem in newListS:
+				newStringS += newElem
+			for perm in Permute(newStringS):
+				perms.append(elem + perm)
+
+	return perms
 
 
 
