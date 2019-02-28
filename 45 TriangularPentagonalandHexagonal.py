@@ -3,30 +3,24 @@
 import math
 
 def FindTriangularPentagonalandHexagonal():
+	# All Hexagonal numbers are triangular, so we're just
+	# looking for a hexagonal number which is also pentagonal.
 
-	i = 40756
+	# Start from the 144th hexagonal number
+	i = 144
 
 	while True:
-		endI = i % 10
-
-		if not endI == 1 or not endI == 0 or not endI == 5 or not endI == 6:
-			i += 1
-			continue
-
-		tH = math.sqrt(1 + 8 * i)
-		p = math.sqrt(1 + 24 * i)
-		if (tH == math.floor(tH) and tH % 4 == 3 and\
-			p == math.floor(p) and p % 6 == 5):
+		hexa = i * (2 * i - 1)
+		penta = math.sqrt(1 + 24 * hexa)
+		if penta % 6 == 5 and penta == math.floor(penta):
 			break
 		else:
 			i += 1
-			continue
 
-	print(i)
-	return i
+	print(hexa)
+	return hexa
 
 FindTriangularPentagonalandHexagonal()
 # Returns ????
 
 
-	
