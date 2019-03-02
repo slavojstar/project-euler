@@ -6,7 +6,7 @@ def FindCircularPrimes():
 
 	circPrimes = []
 
-	primes = Utilities.LimPrimes(1000000)
+	primes = Utilities.LimPrimes(0, 1000000)
 
 	for prime in primes:
 		if prime in circPrimes:
