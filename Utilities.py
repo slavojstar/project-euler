@@ -264,17 +264,29 @@ def NPrimes(n):
 		i += 1
 	return primes
 
-def LimPrimes(limit):
-	''' Returns an array of all the primes up to but not
-	including the limit (not very efficient) '''
-	if not isinstance(limit, (int, float)):
-		print("LimPrimes({0}): Warning: {0} is not an int or a float.".format(limit))
+def LimPrimes(loLimit, hilimit):
+	''' Returns an array of all the primes from loLimit and
+	up to but not including the hilimit (not very efficient) '''
+	if not isinstance(loLimit, (int, float)):
+		print("LimPrimes({0}, {1}): Warning: {0} is not an int or a float.".format(loLimit, hiLimit))
 		return
 
-	primes = []
-	i = 1
+	if not isinstance(hiLimit, (int, float)):
+		print("LimPrimes({0}, {1}): Warning: {1} is not an int or a float.".format(loLimit, hiLimit))
+		return
 
-	while i < limit:
+	if loLimit >= hiLimit:
+		print("LimPrimes({0}, {1}): Warning: The lower limit cannot be \
+			higher or equal to than the higher limit.".format(loLimit, hiLimit))
+		return
+
+	if loLimit < 0:
+		return LimPrimes(0, hiLimit)
+
+	primes = []
+	i = loLimit
+
+	while i < hiLimit:
 		if IsPrime(i):
 			primes.append(i)
 		i += 1
@@ -308,7 +320,7 @@ def PrimeSumUnderK(n, k, primes = []):
 		return 1
 
 	if not primes:
-		primes = LimPrimes(k + 1)
+		primes = LimPrimes(0, k + 1)
 	else:
 		# If any of the primes in the array are above k, we
 		# discard them
@@ -485,7 +497,7 @@ def PrimeFactors(n):
 	if IsPrime(n):
 		return [n]
 
-	potentialPrimes = LimPrimes(math.sqrt(n) + 1)
+	potentialPrimes = LimPrimes(0, math.sqrt(n) + 1)
 	factors = []
 	i = 0
 
