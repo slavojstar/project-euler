@@ -7,7 +7,7 @@ def FindQuadraticPrimes():
 	# Check the '27 QuadraticPrimes.pdf' file to see why b needs
 	# to be a large prime and, unless b = 2, a needs to be a 
 	# small odd number.
-	potentialBs = LimPrimes(1000)[::-1]
+	potentialBs = LimPrimes(0, 1000)[::-1]
 
 	potentialAs = [x for x in range(-999, 1000) if x % 2 != 0]
 
