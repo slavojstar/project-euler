@@ -792,17 +792,17 @@ def Permute(s):
 
 	return perms
 
-def LastDigs(n, p, s):
+def LastDigsPower(n, p, s):
 	''' Returns the last s digits of n ^ p where n and p
 	are natural numbers greater than 0 '''
 	if not isinstance(n, int) or n < 1:
-		print("LastDigs({0}, {1}, {2}): Warning: {0} must be an integer greater than 0.".format(n, p, s))
+		print("LastDigsPower({0}, {1}, {2}): Warning: {0} must be an integer greater than 0.".format(n, p, s))
 
 	if not isinstance(p, int) or p < 1:
-		print("LastDigs({0}, {1}, {2}): Warning: {1} must be an integer greater than 0.".format(n, p, s))
+		print("LastDigsPower({0}, {1}, {2}): Warning: {1} must be an integer greater than 0.".format(n, p, s))
 
 	if not isinstance(s, int)or s < 1:
-		print("LastDigs({0}, {1}, {2}): Warning: {2} must be an integer greater than 0.".format(n, p, s))
+		print("LastDigsPower({0}, {1}, {2}): Warning: {2} must be an integer greater than 0.".format(n, p, s))
 
 	strN = str(n)
 
@@ -818,12 +818,31 @@ def LastDigs(n, p, s):
 		res *= n
 
 	finalStr = str(res)
-	finalInt = int(finalStr[len(finalStr) - s:])
+	finalInt = res
+
+	if len(finalStr) > s:
+		finalInt = int(finalStr[len(finalStr) - s:])
 	
 	return finalInt
 
+def LastDigsSum(summands, s):
+	''' Returns the last s digits of a sum of the input summands '''
 
+	bigSum = 0
+	for summand in summands:
+		strSummand = str(summand)
 
+		if len(strSummand) > s:
+			summand = int(strSummand[len(strSummand) - s:])
+
+		bigSum += summand
+
+		strBigSum = str(bigSum)
+
+		if len(strBigSum) > s:
+			bigSum = int(strBigSum[len(strBigSum) - s:])
+
+	return bigSum
 
 
 
