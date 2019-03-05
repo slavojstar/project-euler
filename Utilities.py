@@ -772,6 +772,8 @@ def NthChampernowne(n):
 
 def Permute(s):
 	''' Returns a list of permutations of a string s '''
+	if not isinstance(s, str):
+		print("Permute({0}): Warning: {0} must be a string.".format(s))
 	if len(s) == 1:
 		return [s[0]]
 	elif len(s) == 2:
@@ -789,6 +791,45 @@ def Permute(s):
 				perms.append(elem + perm)
 
 	return perms
+
+def LastDigs(n, p, s):
+	''' Returns the last s digits of n ^ p where n and p
+	are natural numbers greater than 0 '''
+	if not isinstance(n, int) or n < 1:
+		print("LastDigs({0}, {1}, {2}): Warning: {0} must be an integer greater than 0.".format(n, p, s))
+
+	if not isinstance(p, int) or p < 1:
+		print("LastDigs({0}, {1}, {2}): Warning: {1} must be an integer greater than 0.".format(n, p, s))
+
+	if not isinstance(s, int)or s < 1:
+		print("LastDigs({0}, {1}, {2}): Warning: {2} must be an integer greater than 0.".format(n, p, s))
+
+	strN = str(n)
+
+	if len(strN) > s:
+		n = int(strN[len(strN) - s:])
+
+	res = n
+
+	for i in range(p - 1):
+		strRes = str(res)
+		if len(strRes) > s:
+			res = int(strRes[len(strRes) - s:])
+		res *= n
+
+	finalStr = str(res)
+	finalInt = int(finalStr[len(finalStr) - s:])
+	
+	return finalInt
+
+
+
+
+
+
+
+
+
 
 
 
