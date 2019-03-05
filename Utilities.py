@@ -828,6 +828,12 @@ def LastDigsPower(n, p, s):
 def LastDigsSum(summands, s):
 	''' Returns the last s digits of a sum of the input summands '''
 
+	if not isinstance(summands, list):
+		print("LastDigsSum({0}, {1}): Warning: {0} must be a list.".format(summands, s))
+
+	if not isinstance(s, int) or s < 1:
+		print("LastDigsSum({0}, {1}): Warning: {1} must be a positive int.".format(summands, s))
+
 	bigSum = 0
 	for summand in summands:
 		strSummand = str(summand)
