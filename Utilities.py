@@ -641,6 +641,7 @@ def Partition(n):
 	''' Returns the partition number of n '''
 	if not isinstance(n, int):
 		print("Partition({0}): Warning: {0} is not an int.".format(n))
+		return
 
 	jsonFileRead = open('PartitionObject.json', 'r')
 	dataDict = json.load(jsonFileRead)
@@ -738,6 +739,7 @@ def NthChampernowne(n):
 
 	if not isinstance(n, int) or n < 1:
 		print("NthChampernowne({0}): Warning: {0} must be an integer greater than 0.".format(n))
+		return
 
 	# There are exactly 9 * n * (10 ** (n - 1)) numbers that have n digits. So you can
 	# partition the fractional part of Champernowne's constant into bins of size
@@ -774,6 +776,7 @@ def Permute(s):
 	''' Returns a list of permutations of a string s '''
 	if not isinstance(s, str):
 		print("Permute({0}): Warning: {0} must be a string.".format(s))
+		return
 	if len(s) == 1:
 		return [s[0]]
 	elif len(s) == 2:
@@ -797,12 +800,15 @@ def LastDigsPower(n, p, s):
 	are natural numbers greater than 0 '''
 	if not isinstance(n, int) or n < 1:
 		print("LastDigsPower({0}, {1}, {2}): Warning: {0} must be an integer greater than 0.".format(n, p, s))
+		return
 
 	if not isinstance(p, int) or p < 1:
 		print("LastDigsPower({0}, {1}, {2}): Warning: {1} must be an integer greater than 0.".format(n, p, s))
+		return
 
 	if not isinstance(s, int)or s < 1:
 		print("LastDigsPower({0}, {1}, {2}): Warning: {2} must be an integer greater than 0.".format(n, p, s))
+		return
 
 	strN = str(n)
 
@@ -830,9 +836,11 @@ def LastDigsSum(summands, s):
 
 	if not isinstance(summands, list):
 		print("LastDigsSum({0}, {1}): Warning: {0} must be a list.".format(summands, s))
+		return
 
 	if not isinstance(s, int) or s < 1:
 		print("LastDigsSum({0}, {1}): Warning: {1} must be a positive int.".format(summands, s))
+		return
 
 	bigSum = 0
 	for summand in summands:
@@ -850,9 +858,56 @@ def LastDigsSum(summands, s):
 
 	return bigSum
 
+def LargeSum(s1, s2):
+	''' Takes two positive integers s1 and s2 as strings and returns their sum 
+	as a string '''
 
+	if not isinstance(s1, str) or not isinstance(s2, str):
+		print("LargeSum({0}, {1}): Warning: Both inputs must be positive integers".format(s1, s2))
+		return
 
+	l1 = list(s1)
+	l2 = list(s2)
 
+	for i in range(len(l1)):
+		l1[i] = int(l1[i])
+
+	for j in range(len(l2)):
+		l2[j] = int(l2[j])
+
+	checkDiff = len(l1) - len(l2)
+
+	if checkDiff > 0:
+		for k in range(checkDiff):
+			l2.insert(0, 0)
+	else:
+		for s in range(-checkDiff):
+			l1.insert(0, 0)
+
+	l1.insert(0, 0)
+	l2.insert(0, 0)
+
+	overflow = 0
+	l3 = []
+
+	# Employ the method of adding 2 large numbers up
+	# learnt in elementary school:
+	for i in range(len(l1) - 1, 0, -1):
+		firstSum = l1[i] + l2[i] + overflow
+		modulo = firstSum % 10
+		overflow = math.floor(firstSum / 10)
+
+		l3.insert(0, modulo)
+
+	l3.insert(0, overflow)
+
+	finalStr = ''
+
+	for i in l3:
+		finalStr += str(i)
+
+	finalStr = str(int(finalStr))
+	return finalStr
 
 
 
