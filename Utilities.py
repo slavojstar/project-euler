@@ -906,15 +906,13 @@ def LargeSum(s1, s2):
 	for i in l3:
 		finalStr += str(i)
 
+	while True:
+		if finalStr[0] == '0':
+			finalStr = finalStr[1:]
+		else:
+			break
 
 	return finalStr
-
-for i in range(16, 50):
-	pwy = str(2 ** i)
-	sums = 0
-	for char in pwy:
-		sums += int(char)
-	print(sums)
 
 
 
