@@ -264,7 +264,7 @@ def NPrimes(n):
 		i += 1
 	return primes
 
-def LimPrimes(loLimit, hilimit):
+def LimPrimes(loLimit, hiLimit):
 	''' Returns an array of all the primes from loLimit and
 	up to but not including the hilimit (not very efficient) '''
 	if not isinstance(loLimit, (int, float)):
@@ -497,7 +497,7 @@ def PrimeFactors(n):
 	if IsPrime(n):
 		return [n]
 
-	potentialPrimes = LimPrimes(0, math.sqrt(n) + 1)
+	potentialPrimes = LimPrimes(0, math.floor(math.sqrt(n)) + 1)
 	factors = []
 	i = 0
 
@@ -915,14 +915,31 @@ def LargeSum(s1, s2):
 	return finalStr
 
 
+def deprecated(fun):
+
+	def wrapped_fun(*args, **kwargs):
+
+		print("Warning: function %s is deprecated." % fun)
+		return fun(*args, **kwargs)
+
+	return wrapped_fun
 
 
+#~~~~~~~~PLAYGROUND~~~~~~~~#
 
+from line_profiler import profile
 
+def sleep():
+	seconds = random.randint(1, 5);
+	time.sleep(seconds)
 
-
-
-
+@profile
+def test():
+	sleep()
+	sleep()
+	sleep()
+	sleep()
+	sleep()
 
 
 
