@@ -927,19 +927,19 @@ def deprecated(fun):
 
 #~~~~~~~~PLAYGROUND~~~~~~~~#
 
-from line_profiler import profile
+# from line_profiler import profile
 
-def sleep():
-	seconds = random.randint(1, 5);
-	time.sleep(seconds)
+# def sleep():
+# 	seconds = random.randint(1, 5);
+# 	time.sleep(seconds)
 
-@profile
-def test():
-	sleep()
-	sleep()
-	sleep()
-	sleep()
-	sleep()
+# @profile
+# def test():
+# 	sleep()
+# 	sleep()
+# 	sleep()
+# 	sleep()
+# 	sleep()
 
 
 
