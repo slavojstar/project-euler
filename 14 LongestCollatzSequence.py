@@ -16,6 +16,7 @@ def CollatzSequence(n):
 		else:
 			currentNumber = 3 * currentNumber + 1
 			sequence.append(currentNumber)
+			currentNumber /= 2
 
 	return sequence
 
