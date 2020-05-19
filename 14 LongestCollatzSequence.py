@@ -16,8 +16,6 @@ def CollatzSequence(n):
 		else:
 			currentNumber = 3 * currentNumber + 1
 			sequence.append(currentNumber)
-			currentNumber /= 2
-			sequence.append(currentNumber)
 
 	return sequence
 
@@ -46,10 +44,6 @@ def FindLongestCollatz():
 			# Check for sequences colliding
 			if int(item) in chainDict:
 				break
-			# If the chain goes above 1,000,000 we don't care about it
-			elif item > 1000000:
-				antiIndex += 1
-				continue
 
 			chainDict.update({int(item): length - antiIndex})
 			antiIndex += 1
